@@ -10,12 +10,6 @@
 # endpage - last page to get searched
 # imgline - line in the html that includes the comic image
 # nextimg - line in the html that includes reference to the next html page
-#
-# TODO:
-# Rename images incase websites dont follow their own nameing convention
-#  - look into taging the origional url to the jpg somehow
-# check if numbering system if off
-# Allow the user to start not at the beginning (imgnum !=0)
 
 import os
 import re

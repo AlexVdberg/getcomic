@@ -1,0 +1,10 @@
+This file contains a list of known bugs and enhancements for future development
+
+Enhancements:
+ - look into taging the origional url to the jpg somehow
+ - check if numbering system if off
+ - Allow the user to start not at the beginning (imgnum !=0)
+ - Specify alternate download location
+
+Bugs:
+ - None!

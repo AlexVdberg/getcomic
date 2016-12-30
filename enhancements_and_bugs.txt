@@ -5,6 +5,7 @@ Enhancements:
  - check if numbering system if off
  - Allow the user to start not at the beginning (imgnum !=0)
  - Specify alternate download location
+ - Add a config file so the script remains the same for each webcomic (hold the variables)
 
 Bugs:
- - None!
+ - If the next button is not labled 'next' in the html, the reg expr will need to be adjusted acordingly

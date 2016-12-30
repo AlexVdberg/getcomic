@@ -4,6 +4,7 @@
 # 27dec2016,aav Added reg expressions
 # 28dec2016,aav fixed .jpg reg expr to allow spaces for stupid websites that use spaces
 # 29dec2016,aav prepend img names and allow redownloading of sites without duplicates
+# 29dec2016,aav Added suport for gif files
 #
 # Usage
 # curpage - the page that the script will start on
@@ -33,9 +34,9 @@ while curpage != endpage:
     #Search the page for comic image
     f = open('page.html', 'r')
     line = f.readlines()
-    searchobj = re.search( r'http[^"]*(jpg|png)', line[imgline])
+    searchobj = re.search( r'http[^"]*(jpg|png|gif)', line[imgline])
     print(searchobj.group())
-    rawname = re.search( r'[^"/]*(jpg|png)', line[imgline])
+    rawname = re.search( r'[^"/]*(jpg|png|gif)', line[imgline])
 
     #Prepend the image with the number to keep them in order
     savedimgname = str(imgnum).zfill(5) + '-' + rawname.group()

@@ -54,3 +54,4 @@ while curpage != endpage:
     else:
         print('reached the end')
 
+os.system('rm page.html')

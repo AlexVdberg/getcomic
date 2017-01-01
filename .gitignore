@@ -1,4 +1,6 @@
 *.png
 *.jpg
+*.gif
 *.swp
-
+comic.cfg
+page.html

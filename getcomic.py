@@ -1,10 +1,12 @@
 # getcomic.py
 # 
 # Usage
-# curPage - the page that the script will start on
-# endPage - last page to get searched
-# imgLine - line in the html that includes the comic image
-# nextImg - line in the html that includes reference to the next html page
+# Specify the values for the following parameters on separate lines in a
+# comic.cfg file on indivitual lines
+#   curPage - the page that the script will start on
+#   endPage - last page to get searched
+#   imgLine - line in the html that includes the comic image
+#   nextImg - line in the html that includes reference to the next html page
 
 import os
 import re
@@ -16,7 +18,7 @@ def pullImages(outDir, curPage, endPage, imgLine, nextImg):
     
     while curPage != endPage:
         imgNum = imgNum + 1
-        print('Current page:' + curPage)
+        print('Current page: ' + curPage)
     
         #Get the raw html of the comic page
         pageGet = 'wget "' + curPage + '" -O page.html'
@@ -43,29 +45,36 @@ def pullImages(outDir, curPage, endPage, imgLine, nextImg):
             print(nextObj.group())
             curPage = nextObj.group()
         else:
-            print('reached the end')
+            print('No next comic url found')
 
 def main():
-    #Default output directory
-    outDir = os.getcwd()
-
-    #Variables specific to the website
-    curPage = 'http://www.supernormalstep.com/archives/8'
-    endPage = 'http://www.supernormalstep.com/archives/trouble'
-    imgLine = 31 - 1
-    nextImg = 31 - 1
-
     #Arguments and Options parsing
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--directory", help="Specifies a output directory")
+    parser.add_argument("-c", "--config", help="Specifies the configuration file")
     args = parser.parse_args()
     
     #Dealing with the arguments passed in
     if args.directory:
         outDir = args.directory
+    else:
+        outDir = os.getcwd()
+
+    if args.config:
+        cfgFile = args.config
+    else:
+        cfgFile = outDir + '/comic.cfg'
     
     print('Output Directory: ' + outDir)
-    print()
+    print
+
+    #Variables specific to the website
+    cfgFile = open(outDir + '/comic.cfg', 'r')
+    cfgLines = cfgFile.readlines()
+    curPage = cfgLines[0].replace('\n', '')
+    endPage = cfgLines[1].replace('\n', '')
+    imgLine = int(cfgLines[2]) - 1
+    nextImg = int(cfgLines[3]) - 1
 
     pullImages(outDir, curPage, endPage, imgLine, nextImg)
     os.system('rm page.html')
